@@ -27,6 +27,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.swing.SwingUtilities;
 
+import com.github.boukefalos.jlibloader.Native;
+
 /**
  * JIntellitype A Java Implementation for using the Windows API Intellitype
  * commands and the RegisterHotKey and UnRegisterHotkey API calls for globally
@@ -90,34 +92,9 @@ public final class JIntellitype implements JIntellitypeConstants {
     * calling.
     */
    private JIntellitype() {
-      try {
-         // Load JNI library
-         System.loadLibrary("JIntellitype");
-      } catch (Throwable exLoadLibrary) {
-         try {
-            if (getLibraryLocation() != null) {
-               System.load(getLibraryLocation());
-            } else {
-               String jarPath = "com/melloware/jintellitype/";
-               String tmpDir = System.getProperty("java.io.tmpdir");
-               try {
-                  String dll = "JIntellitype.dll";
-                  fromJarToFs(jarPath + dll, tmpDir + dll);
-                  System.load(tmpDir + dll);
-               } catch (UnsatisfiedLinkError e) {
-                  String dll = "JIntellitype64.dll";
-                  fromJarToFs(jarPath + dll, tmpDir + dll);
-                  System.load(tmpDir + dll);
-               }
-            }
-         } catch (Throwable exAllFailed) {
-            throw new JIntellitypeException(
-                     "Could not load JIntellitype.dll from local file system or from inside JAR", exAllFailed);
-         }
-      }
-
-      initializeLibrary();
-      this.keycodeMap = getKey2KeycodeMapping();
+		Native.load("com.github.boukefalos", "jlibintellitype");
+		initializeLibrary();
+		this.keycodeMap = getKey2KeycodeMapping();
    }
 
    /**

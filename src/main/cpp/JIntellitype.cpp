@@ -143,7 +143,7 @@ extern "C"
  * Signature: (Ljava/lang/String;)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_melloware_jintellitype_JIntellitype_isRunning
-  (JNIEnv *env, jclass, jstring wndName)
+  (JNIEnv *env, jobject, jstring wndName)
 {
     // App name for the hidden window's registered class
     CHAR szAppName[] = "SunAwtFrame";

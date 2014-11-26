@@ -137,7 +137,7 @@ void JIntellitypeHandler::doInitialize()
 		return;
 
 	 //Set pointer to this object inside the Window's USERDATA section
-	SetWindowLong( m_window, GWL_USERDATA, (LONG) this );
+	SetWindowLongPtr( m_window, GWLP_USERDATA, (LONG) this );
 	
 	// hide the window
 	ShowWindow(m_window, SW_HIDE);
@@ -255,7 +255,7 @@ LRESULT CALLBACK JIntellitypeHandler::WndProc( HWND hWnd, UINT uMessage, WPARAM 
     if (uMessage == WM_SHELLHOOK) {
         if (wParam == HSHELL_APPCOMMAND) {
            jint cmd  = GET_APPCOMMAND_LPARAM(lParam);        
-           JIntellitypeHandler *l_this = (JIntellitypeHandler *) GetWindowLong( hWnd, GWL_USERDATA ); 
+           JIntellitypeHandler *l_this = (JIntellitypeHandler *) GetWindowLongPtr( hWnd, GWLP_USERDATA );
            l_this->intellitype(cmd);          
         }
         return TRUE;        
@@ -264,7 +264,7 @@ LRESULT CALLBACK JIntellitypeHandler::WndProc( HWND hWnd, UINT uMessage, WPARAM 
     // check for registered hotkey messages and send them to HotKeyListeners
     switch( uMessage ) {
         case WM_HOTKEY: {
-            JIntellitypeHandler *l_this = (JIntellitypeHandler *) GetWindowLong( hWnd, GWL_USERDATA ); 
+            JIntellitypeHandler *l_this = (JIntellitypeHandler *) GetWindowLongPtr( hWnd, GWLP_USERDATA );
         	l_this->fireHotKey(wParam);
             return TRUE;
     		break;      
