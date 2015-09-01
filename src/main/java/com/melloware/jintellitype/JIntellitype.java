@@ -92,9 +92,9 @@ public final class JIntellitype implements JIntellitypeConstants {
     * calling.
     */
    private JIntellitype() {
-		Native.load("com.github.boukefalos", "jlibintellitype");
-		initializeLibrary();
-		this.keycodeMap = getKey2KeycodeMapping();
+        Native.load("com.github.boukefalos", "jlibintellitype");
+        initializeLibrary();
+        this.keycodeMap = getKey2KeycodeMapping();
    }
 
    /**

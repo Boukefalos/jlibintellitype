@@ -36,11 +36,11 @@ package com.melloware.jintellitype;
  */
 public interface HotkeyListener
 {
-	/**
-	 * Event fired when a WM_HOTKEY message is received that was initiated
-	 * by this application.
-	 * <p>
-	 * @param identifier the unique Identifer the Hotkey was assigned
-	 */
-	void onHotKey( int identifier );
+    /**
+     * Event fired when a WM_HOTKEY message is received that was initiated
+     * by this application.
+     * <p>
+     * @param identifier the unique Identifer the Hotkey was assigned
+     */
+    void onHotKey( int identifier );
 }

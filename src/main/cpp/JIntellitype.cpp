@@ -1,8 +1,8 @@
 /*
-	JIntellitype (http://www.melloware.com/)
-	Java JNI API for Windows Intellitype commands and global keystrokes.
+    JIntellitype (http://www.melloware.com/)
+    Java JNI API for Windows Intellitype commands and global keystrokes.
 
-	Copyright (C) 1999, 2008 Emil A. Lefkof III, info@melloware.com
+    Copyright (C) 1999, 2008 Emil A. Lefkof III, info@melloware.com
 
         Licensed under the Apache License, Version 2.0 (the "License");
         you may not use this file except in compliance with the License.
@@ -17,8 +17,8 @@
         limitations under the License.
 
 
-	Compiled with Mingw port of GCC,
-	Bloodshed Dev-C++ IDE (http://www.bloodshed.net/devcpp.html)
+    Compiled with Mingw port of GCC,
+    Bloodshed Dev-C++ IDE (http://www.bloodshed.net/devcpp.html)
 */
 #include "stdafx.h"
 #include "com_melloware_jintellitype_JIntellitype.h"
@@ -29,21 +29,21 @@ HINSTANCE g_instance = NULL;
 
 BOOL WINAPI DllMain
 (
-	HINSTANCE hinstDLL,  // handle to DLL module
-	DWORD fdwReason,     // reason for calling function
-	LPVOID lpvReserved   // reserved
+    HINSTANCE hinstDLL,  // handle to DLL module
+    DWORD fdwReason,     // reason for calling function
+    LPVOID lpvReserved   // reserved
 )
 {
     switch( fdwReason )
-	{
-		case DLL_THREAD_ATTACH:
-		case DLL_THREAD_DETACH:
-		case DLL_PROCESS_DETACH:
+    {
+        case DLL_THREAD_ATTACH:
+        case DLL_THREAD_DETACH:
+        case DLL_PROCESS_DETACH:
 
-		case DLL_PROCESS_ATTACH:
-			g_instance = hinstDLL;
-			
-			break;
+        case DLL_PROCESS_ATTACH:
+            g_instance = hinstDLL;
+            
+            break;
     }
     return TRUE;
 }
@@ -81,16 +81,16 @@ JNIEXPORT void JNICALL Java_com_melloware_jintellitype_JIntellitype_regHotKey
     // Get handler
     JIntellitypeHandler *l_handler = JIntellitypeHandler::extract( env, object ); 
   
-  	if( l_handler )
-	{
-		l_handler->regHotKey(identifier, modifier, keycode);
-	}
-	else
-	{
+      if( l_handler )
+    {
+        l_handler->regHotKey(identifier, modifier, keycode);
+    }
+    else
+    {
         // throw exception
-		jclass JIntellitypeException = env->FindClass("com/melloware/jintellitype/JIntellitypeException");
+        jclass JIntellitypeException = env->FindClass("com/melloware/jintellitype/JIntellitypeException");
         env->ThrowNew(JIntellitypeException,"JIntellitype was not initialized properly.");
-	} 
+    } 
 }
 
 extern "C" 
@@ -105,16 +105,16 @@ JNIEXPORT void JNICALL Java_com_melloware_jintellitype_JIntellitype_unregHotKey
   // Get handler
   JIntellitypeHandler *l_handler = JIntellitypeHandler::extract( env, object ); 
   
-  	if( l_handler )
-	{
-		l_handler->unregHotKey(identifier);
-	}
-	else
-	{
+      if( l_handler )
+    {
+        l_handler->unregHotKey(identifier);
+    }
+    else
+    {
         // throw exception
-		jclass JIntellitypeException = env->FindClass("com/melloware/jintellitype/JIntellitypeException");
+        jclass JIntellitypeException = env->FindClass("com/melloware/jintellitype/JIntellitypeException");
         env->ThrowNew(JIntellitypeException,"JIntellitype was not initialized properly.");
-	} 
+    } 
    
 }
 
@@ -127,12 +127,12 @@ extern "C"
 JNIEXPORT void JNICALL Java_com_melloware_jintellitype_JIntellitype_terminate
   (JNIEnv *env, jobject object)
 {
-  	// Get handler
-	JIntellitypeHandler *l_handler = JIntellitypeHandler::extract( env, object );
+      // Get handler
+    JIntellitypeHandler *l_handler = JIntellitypeHandler::extract( env, object );
 
-	// Clean up all resources allocated by this API
-	if( l_handler )
-		l_handler->terminate(); 
+    // Clean up all resources allocated by this API
+    if( l_handler )
+        l_handler->terminate(); 
      
 }
 
@@ -148,10 +148,10 @@ JNIEXPORT jboolean JNICALL Java_com_melloware_jintellitype_JIntellitype_isRunnin
     // App name for the hidden window's registered class
     CHAR szAppName[] = "SunAwtFrame";
     const char *cWndName = env->GetStringUTFChars(wndName, 0);
-	// Find out if there's a hidden window with the given title
-	HWND mHwnd = FindWindow(szAppName, cWndName);
-	env->ReleaseStringUTFChars(wndName, cWndName);
-	// If there is, another instance of our app is already running
-	return mHwnd != NULL;    
+    // Find out if there's a hidden window with the given title
+    HWND mHwnd = FindWindow(szAppName, cWndName);
+    env->ReleaseStringUTFChars(wndName, cWndName);
+    // If there is, another instance of our app is already running
+    return mHwnd != NULL;    
 }
 

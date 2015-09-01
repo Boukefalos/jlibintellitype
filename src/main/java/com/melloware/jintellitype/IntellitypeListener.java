@@ -41,11 +41,11 @@ package com.melloware.jintellitype;
  */
 public interface IntellitypeListener
 {
-	/**
-	 * Event fired when a WM_APPCOMMAND message is received that was initiated
-	 * by this application.
-	 * <p>
-	 * @param command the WM_APPCOMMAND that was pressed
-	 */
-	void onIntellitype( int command );
+    /**
+     * Event fired when a WM_APPCOMMAND message is received that was initiated
+     * by this application.
+     * <p>
+     * @param command the WM_APPCOMMAND that was pressed
+     */
+    void onIntellitype( int command );
 }
